@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Gestão de Pessoas</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div style="background-color: #A1F7A1">
+    <div class="container my-2">
+        <h1>Sistema gerenciador de clientes</h1>
+        <a th:href="@{/rh/clientes/novo}" class="btn btn-primary btn-sm mb-3">  +  </a>
+        <table border="1" class="table table-success table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Profissão</th>
+                <th>CPF</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${listaClientes.isEmpty()}">
+                <td class="text-center" colspan="3">No records found. Add some...!</td>
+            </tr>
+            <tr th:each="cliente : ${listaClientes} ">
+                <td th:text="${cliente.id}"></td>
+                <td th:text="${cliente.nome}"></td>
+                <td th:text="${cliente.profissao}"></td>
+                <td th:text="${cliente.cpf}"></td>
+                <td>
+                    <a th:href="@{/rh/clientes/{id}(id=${cliente.id})}" class="btn btn-primary">Alterar</a>
+                    <a th:href="@{/rh/clientes/rendimentos/novo/{id}(id=${cliente.id})}" class="btn btn-warning">Adicionar Rendimento</a>
+                    <a th:href="@{/rh/clientes/rendimentos/{id}(id=${cliente.id})}" class="btn btn-warning">Ver rendimentos</a>
+                    <a th:href="@{/rh/clientes/excluir/{id}(id=${cliente.id})}" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
